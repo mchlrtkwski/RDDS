@@ -38,10 +38,10 @@ while 1:
         node = NetworkNode(networkData[x * 7], networkData[(x * 7) + 2])
         SSID_List.append(node)
 
-
-
-    print SSID_List[0].isDrone()
-    print SSID_List[0].isNearby()
+    for x in range(0, numberOfNetworks):
+        print SSID_List[x].SSID
+        print SSID_List[x].isDrone()
+        print SSID_List[x].isNearby()
     #print RSSI_List[0]
     mac = get_mac()
     #print mac
