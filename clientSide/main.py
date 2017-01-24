@@ -29,6 +29,7 @@ while 1:
 
     #Obtain all terminal output for parsing
     networkData = subprocess.check_output(["/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport", "-s"])
+
     networkData = networkData.split()
     networkData = networkData[8:]
     numberOfNetworks = len(networkData)/7
