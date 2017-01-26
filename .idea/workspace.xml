@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ba73aab-1e63-4a1f-a519-24bd046d4e1f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clientSide/NetworkNode.py" afterPath="$PROJECT_DIR$/clientSide/NetworkNode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clientSide/main.py" afterPath="$PROJECT_DIR$/clientSide/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,8 +23,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clientSide/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="65" column="18" lean-forward="true" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
+            <state relative-caret-position="915">
+              <caret line="65" column="18" lean-forward="false" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
               <folding>
                 <element signature="e#23#40#0" expanded="true" />
               </folding>
@@ -34,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serverApp.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="serverApp.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/serverSide/serverApp.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
@@ -76,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkNode.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NetworkNode.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clientSide/NetworkNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+            <state relative-caret-position="45">
+              <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -102,8 +100,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/serverSide/serverApp.py" />
-        <option value="$PROJECT_DIR$/clientSide/NetworkNode.py" />
         <option value="$PROJECT_DIR$/clientSide/main.py" />
+        <option value="$PROJECT_DIR$/clientSide/NetworkNode.py" />
       </list>
     </option>
   </component>
@@ -114,8 +112,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="73" />
-    <option name="y" value="345" />
+    <option name="y" value="34" />
     <option name="width" value="1440" />
     <option name="height" value="797" />
   </component>
@@ -134,7 +131,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -192,6 +188,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -458,7 +455,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="73" y="345" width="1440" height="797" extended-state="0" />
+    <frame x="0" y="34" width="1440" height="797" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16527778" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -494,6 +491,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/clientSide/NetworkNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/clientSide/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -908,18 +913,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clientSide/NetworkNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/clientSide/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="65" column="18" lean-forward="true" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
+        <state relative-caret-position="915">
+          <caret line="65" column="18" lean-forward="false" selection-start-line="65" selection-start-column="18" selection-end-line="65" selection-end-column="18" />
           <folding>
             <element signature="e#23#40#0" expanded="true" />
           </folding>
@@ -933,6 +930,14 @@
           <folding>
             <element signature="e#23#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clientSide/NetworkNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

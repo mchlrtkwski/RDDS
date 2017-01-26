@@ -4,7 +4,7 @@ class NetworkNode:
         self.SSID = ssid
         self.RSSI = rssi
     def isDrone(self):
-        return (str(self.SSID).lower()).find(("drone")) == True
+        return ((str(self.SSID).lower()).find(("drone")) == 0)
     def isNearby(self):
         #print int(self.RSSI)
         VIOLATION_LIMIT = 300
