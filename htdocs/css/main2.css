@@ -1,0 +1,61 @@
+
+.imageResize{
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+img{
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+}
+body{
+  background-color: #4f92ff;
+}
+.telNumber{
+  display: -webkit-flex;
+   display: flex;
+
+
+}
+.choiceSelect{
+  //display: -webkit-flex;
+   //display: flex;
+   //-webkit-justify-content: space-around;
+    //justify-content: space-around;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    width:auto;
+    border-style: solid;
+}
+.choiceSelect input{
+  
+}
+table{
+width:100%;
+}
+td{
+  text-align: center;
+  border-style: solid;
+}
+tr{
+  border-style: solid;
+}
+.tableHeads{
+  text-align: center;
+  font-weight: bold;
+}
+body{
+  margin-left: 0;
+  margin-right:0;
+  margin-bottom: 0;
+  padding: none;
+}
+.form-signin{
+  border-style: solid;
+  border-radius: 5%;
+  background-color: white;
+}
