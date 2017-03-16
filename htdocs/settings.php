@@ -25,7 +25,7 @@ if(!empty($_POST['phoneNumber'])){
 ////////////////////Check to see if carrier needs editing///////////////////////
 if(!empty($_POST['carrier'])){
   $query_params = array(':carrier' => $_POST['carrier'], ':user_id' => $_SESSION['user']['id'],);
-  $query = "UPDATE user SET carrier = :carrier WHERE id = :user_id";
+  $query = "UPDATE users SET carrier = :carrier WHERE id = :user_id";
   try{
     $stmt = $db->prepare($query);
     $result = $stmt->execute($query_params);
