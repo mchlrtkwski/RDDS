@@ -15,7 +15,7 @@ login = 'classalerts@outlook.com'
 password = '001001001m'
 recipients_emails = [receiverName]
 
-msg = MIMEText('A class you requested has opened up', 'plain', 'utf-8')
+msg = MIMEText('Hello', 'plain', 'utf-8')
 msg['Subject'] = Header('Class Alert', 'utf-8')
 msg['From'] = login
 msg['To'] = ", ".join(recipients_emails)
