@@ -9,6 +9,35 @@ if(empty($_SESSION['user'])){
 }
 
 $savedChangeBanner = false;
+
+////////////////////Grab current information from Database//////////////////////
+$userArray = $_SESSION['user'];
+$userId = $userArray['id'];
+$query = "SELECT email, phone, alertMethod, carrier, salt FROM users WHERE id = $userId";
+try{
+  $stmt = $db->prepare($query);
+  $stmt->execute();
+}
+catch(PDOException $ex){
+  die("Failed to run query: " . $ex->getMessage());
+}
+$rows = $stmt->fetchAll();
+////////////////////Set Default Variables///////////////////////////////////////
+$phoneNumber = "";
+$alertMethod = "";
+$changePass = "";
+$carrier = "";
+$newPass = "";
+$confirmPass = "";
+$passOption = "";
+$salt = "";
+foreach($rows as $row){
+  $phoneNumber = $row['phone'];
+  $alertMethod = $row['alertMethod'];
+  $carrier = $row['carrier'];
+  $salt = $row['salt'];
+}
+
 /////////////////////Check to see if phoneNumber needs editing//////////////////
 if(!empty($_POST['phoneNumber'])){
   $query_params = array(':phone' => $_POST['phoneNumber'],':user_id' => $_SESSION['user']['id'],);
@@ -21,6 +50,29 @@ if(!empty($_POST['phoneNumber'])){
     die("Failed to run query: " . $ex->getMessage());
   }
   $savedChangeBanner = true;
+}
+/////////////////////Check to see if password needs editing//////////////////
+if(!empty($_POST['passOption']) ){
+	if ($_POST['passOption'] == "Yes") {
+		if (!empty($_POST['newPass']) ) {
+			if ($_POST['newPass'] == $_POST['confirmPass']) {
+				$passAux = hash('sha256', $_POST['newPass'] . $salt);
+				for($round = 0; $round < 65536; $round++) {
+            		$passAux = hash('sha256', $passAux . $salt);
+		        }
+				$query_params = array(':newPass' => $passAux,':user_id' => $_SESSION['user']['id'],);
+  $query = "UPDATE users SET password = :newPass WHERE id = :user_id";
+  try{
+    $stmt = $db->prepare($query);
+    $result = $stmt->execute($query_params);
+  }
+  catch(PDOException $ex){
+    die("Failed to run query: " . $ex->getMessage());
+  }
+  $savedChangeBanner = true;
+			}
+		}
+	}
 }
 ////////////////////Check to see if carrier needs editing///////////////////////
 if(!empty($_POST['carrier'])){
@@ -47,27 +99,6 @@ if(!empty($_POST['alertMethod'])){
     die("Failed to run query: " . $ex->getMessage());
   }
   $savedChangeBanner = true;
-}
-////////////////////Grab current information from Database//////////////////////
-$userArray = $_SESSION['user'];
-$userId = $userArray['id'];
-$query = "SELECT email, phone, alertMethod, carrier FROM users WHERE id = $userId";
-try{
-  $stmt = $db->prepare($query);
-  $stmt->execute();
-}
-catch(PDOException $ex){
-  die("Failed to run query: " . $ex->getMessage());
-}
-$rows = $stmt->fetchAll();
-////////////////////Set Default Variables///////////////////////////////////////
-$phoneNumber = "";
-$alertMethod = "";
-$carrier = "";
-foreach($rows as $row){
-  $phoneNumber = $row['phone'];
-  $alertMethod = $row['alertMethod'];
-  $carrier = $row['carrier'];
 }
 ?>
 <html lang="en">
@@ -99,7 +130,7 @@ foreach($rows as $row){
         <p>Telephone Number & Carrier</p>
         <div class="telNumber">
           <!--///////////////Echo current phoneNumber////////////////////////-->
-          <input name = "phoneNumber" id="inputEmail" class="form-control" placeholder="Phone Number" value = <?php echo $phoneNumber; ?> required autofocus>
+          <input name = "phoneNumber" id="phoneNumber" class="form-control" placeholder="Phone Number" value = <?php echo $phoneNumber; ?> required autofocus>
           <select name = "carrier">
             <!--///////////////Set current default setting///////////////////-->
             <option value="" <?php if ($carrier == ""){echo "selected";}?>>None</option>
@@ -117,7 +148,38 @@ foreach($rows as $row){
           <input type="radio" name="alertMethod" value="Text" <?php if ($alertMethod == "Text"){echo "checked";}?>> Text
           <input type="radio" name="alertMethod" value="Both" <?php if ($alertMethod == "Both"){echo "checked";}?>> Both
         </div>
+        
         <hr>
+        <p>Change Password</p>
+        <div class="choiceSelect">
+          <!--///////////////////Set current default setting/////////////////-->
+          <input type="radio" name="passOption" value="Yes"			 <?php 
+		  if ($passOption == "Yes"){
+			  echo "checked";
+			  }
+			  ?>> Yes
+          <input type="radio" name="passOption" value="No" <?php if ($passOption == "No"){echo "checked";}?>> No
+        </div>
+        
+        
+        <hr>
+        <p>Insert New Password</p>
+        <div class="telNumber">
+          <!--///////////////Echo current phoneNumber////////////////////////-->
+          <input name = "newPass" type ="password" id="newPass" class="form-control" placeholder="New Password" value = <?php echo $newPass; ?>>
+        </div>
+        
+        <hr>
+        
+        <p>Confirm New Password</p>
+        <div class="telNumber">
+          <!--///////////////Echo current phoneNumber////////////////////////-->
+          <input name = "confirmPass" type ="password" id="confirmPass" class="form-control" placeholder="Confirm Password" value = <?php echo $confirmPass; ?>>
+          
+          </div>
+          
+        <hr>
+        
         <button class="btn btn-lg btn-primary btn-block" type="submit">Apply Changes</button>
         <hr>
         <footer>

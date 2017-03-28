@@ -67,7 +67,13 @@
         <h2 class="form-signin-heading">Please sign in</h2>
 
         <!--//////////////////Print out failed login//////////////////////// -->
-        <?php if ($shouldPrintFail){echo "<p style=\"text-align:center; color: red;\">Login Failure</p>";}?>
+        <?php if ($shouldPrintFail){
+			/*echo "<p style=\"text-align:center; color: red;\">Login Failure</p>";*/
+			 
+			 echo "<script type='text/javascript'>alert('Invalid user or password');</script>";
+			 
+			 }
+		?>
 
         <input name = "email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <input name = "password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>

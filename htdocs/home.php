@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+	//TESTING SYNC
+	//TESTING LOCAL TO TEST SERVER
     //Database Connection
     require("db.php");
 
