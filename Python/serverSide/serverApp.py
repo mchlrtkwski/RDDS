@@ -2,6 +2,7 @@
 
 import socket
 import sys
+import MySQLdb
 from thread import start_new_thread
 
 HOST = '127.0.0.1' # all availabe interfaces
