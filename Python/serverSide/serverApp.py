@@ -41,38 +41,35 @@ def client_thread(conn):
     conn.send("Welcome to the Server. Type messages and press enter to send.\n")
 
     while True:
-	
+
         data = conn.recv(1024)
 	db = MySQLdb.connect(host='127.0.0.1', user="root", passwd="", db="rdds", unix_socket="/opt/lamp/var/mysql/mysql.sock")
 	cursor = db.cursor()
-	sql = "SELECT alertMethod,phone,carrier,email FROM users WHERE deviceID = '" + data + "'"
+	sql = "SELECT alertMethod,phone,carrier,email,log FROM users WHERE deviceID = '" + data + "'"
         cursor.execute(sql)
 	results = cursor.fetchall()
 	prefMethod = ""
 	phoneNumber = ""
 	carrier = ""
 	email = ""
+    log = ""
 	for row in results:
 	   prefMethod = row[0]
 	   phoneNumber = row[1]
 	   phoneNumber = phoneNumber + row[2]
 	   email = row[3]
-	
+       log = row[4]
+
 	if (prefMethod == "Text"):
 	   sendAlert(phoneNumber)
 	elif (prefMethod == "Email"):
 	   sendAlert(email)
-	#else if (prefMethod == "Both"):
-	 #  cursor = db.cursor()
-	  # sql = "SELECT phone,carrier,email FROM users WHERE deviceID = '" + data + "'"
-           #cursor.execute(sql)
-	   #results = cursor.fetchall()
-        #sql = "SELECT * FROM users WHERE deviceID = '" + data + "'"
-	#cursor.execute(sql)
-	#results = cursor.fetchone()
-	#sendAlert("mchlrtkwski@gmail.com")
-       # print results
-	db.close()
+    elif (prefMethod == "Both"):
+       sendAlert(phoneNumber)
+       sendAlert(email)
+
+	sql = "UPDATE users SET log = '" + log + "' log WHERE deviceID = '" + data + "'"
+    db.close()
         if not data:
             break
         reply = "OK . . " + data
@@ -88,4 +85,3 @@ while True:
     start_new_thread(client_thread, (conn,))
 
 s.close()
-
