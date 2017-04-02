@@ -3,7 +3,7 @@
 import socket
 import sys
 import MySQLdb
-#import mysql.connector
+from time import gmtime,strftime
 from thread import start_new_thread
 from automateEmail import sendAlert
 
@@ -67,8 +67,9 @@ def client_thread(conn):
     elif (prefMethod == "Both"):
        sendAlert(phoneNumber)
        sendAlert(email)
-
+    log = log + "<tr><td>"+ strftime("%m/%d/%Y", gmtime()) + "</td><td>" + strftime("%H:%M", gmtime()) + "</td></tr>"
 	sql = "UPDATE users SET log = '" + log + "' log WHERE deviceID = '" + data + "'"
+    cursor.execute(sql)
     db.close()
         if not data:
             break
