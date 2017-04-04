@@ -50,6 +50,7 @@ if(!empty($_POST['phoneNumber'])){
     die("Failed to run query: " . $ex->getMessage());
   }
   $savedChangeBanner = true;
+  $phoneNumber = $_POST['phoneNumber'];
 }
 /////////////////////Check to see if password needs editing//////////////////
 if(!empty($_POST['passOption']) ){
@@ -86,6 +87,7 @@ if(!empty($_POST['carrier'])){
     die("Failed to run query: " . $ex->getMessage());
   }
   $savedChangeBanner = true;
+  $carrier = $_POST['carrier'];
 }
 ////////////////////Check to see if alertMethod needs editing///////////////////
 if(!empty($_POST['alertMethod'])){
@@ -99,6 +101,7 @@ if(!empty($_POST['alertMethod'])){
     die("Failed to run query: " . $ex->getMessage());
   }
   $savedChangeBanner = true;
+  $alertMethod = $_POST['alertMethod'];
 }
 ?>
 <html lang="en">
@@ -148,38 +151,38 @@ if(!empty($_POST['alertMethod'])){
           <input type="radio" name="alertMethod" value="Text" <?php if ($alertMethod == "Text"){echo "checked";}?>> Text
           <input type="radio" name="alertMethod" value="Both" <?php if ($alertMethod == "Both"){echo "checked";}?>> Both
         </div>
-        
+
         <hr>
         <p>Change Password</p>
         <div class="choiceSelect">
           <!--///////////////////Set current default setting/////////////////-->
-          <input type="radio" name="passOption" value="Yes"			 <?php 
+          <input type="radio" name="passOption" value="Yes"			 <?php
 		  if ($passOption == "Yes"){
 			  echo "checked";
 			  }
 			  ?>> Yes
           <input type="radio" name="passOption" value="No" <?php if ($passOption == "No"){echo "checked";}?>> No
         </div>
-        
-        
+
+
         <hr>
         <p>Insert New Password</p>
         <div class="telNumber">
           <!--///////////////Echo current phoneNumber////////////////////////-->
           <input name = "newPass" type ="password" id="newPass" class="form-control" placeholder="New Password" value = <?php echo $newPass; ?>>
         </div>
-        
+
         <hr>
-        
+
         <p>Confirm New Password</p>
         <div class="telNumber">
           <!--///////////////Echo current phoneNumber////////////////////////-->
           <input name = "confirmPass" type ="password" id="confirmPass" class="form-control" placeholder="Confirm Password" value = <?php echo $confirmPass; ?>>
-          
+
           </div>
-          
+
         <hr>
-        
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">Apply Changes</button>
         <hr>
         <footer>
