@@ -5,6 +5,11 @@
 
     $shouldPrintFail = false;
 
+    if(!empty($_SESSION['user'])){
+        header("Location: home.php");
+        die("Redirecting to index.php");
+    }
+
     //Check if a POST Request was made
     if(!empty($_POST))
     {
@@ -69,9 +74,9 @@
         <!--//////////////////Print out failed login//////////////////////// -->
         <?php if ($shouldPrintFail){
 			/*echo "<p style=\"text-align:center; color: red;\">Login Failure</p>";*/
-			 
+
 			 echo "<script type='text/javascript'>alert('Invalid user or password');</script>";
-			 
+
 			 }
 		?>
 
