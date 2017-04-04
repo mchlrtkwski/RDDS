@@ -23,6 +23,6 @@ BUFFER_SIZE = 1024
 s = socket(AF_INET, SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
 s.send("1233455")
-data = s.recv(BUFFER_SIZE)
+#data = s.recv(BUFFER_SIZE)
 s.close()
-print "received data:", data
+#print "received data:", data

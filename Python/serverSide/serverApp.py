@@ -10,12 +10,6 @@ from automateEmail import sendAlert
 HOST = '' # all availabe interfaces
 PORT = 5005 # arbitrary non privileged port
 
-#db = MySQLdb.connect(host='127.0.0.1', user="root", passwd="", db="rdds", unix_socket="/opt/lamp/var/mysql/mysql.sock")
-#mariadb_connection = mariadb.connect(user='root', password='', host='127.0.01', database='rdds')
-#cursor = db.cursor()
-#sql = "SELECT * FROM users \
- #      WHERE email = 'mchlrtkwski@gmail.com"
-#cle
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 except socket.error, msg:
@@ -35,46 +29,44 @@ except socket.error, msg:
 s.listen(10)
 print("Listening...")
 
-# The code below is what you're looking for ############
-
 def client_thread(conn):
-    conn.send("Welcome to the Server. Type messages and press enter to send.\n")
 
-    while True:
+    data = conn.recv(1024)
+    if (data != ""):
 
-        data = conn.recv(1024)
-	db = MySQLdb.connect(host='127.0.0.1', user="root", passwd="", db="rdds", unix_socket="/opt/lamp/var/mysql/mysql.sock")
-	cursor = db.cursor()
-	sql = "SELECT alertMethod,phone,carrier,email,log FROM users WHERE deviceID = '" + data + "'"
+        print data
+        givenDevice = data
+        db = MySQLdb.connect(host='127.0.0.1', user="root", passwd="", db="rdds", unix_socket="/opt/lamp/var/mysql/mysql.sock")
+        cursor = db.cursor()
+        sql = "SELECT alertMethod,phone,carrier,email,log FROM users WHERE deviceID = '" + givenDevice + "'"
         cursor.execute(sql)
-	results = cursor.fetchall()
-	prefMethod = ""
-	phoneNumber = ""
-	carrier = ""
-	email = ""
-    log = ""
-	for row in results:
-	   prefMethod = row[0]
-	   phoneNumber = row[1]
-	   phoneNumber = phoneNumber + row[2]
-	   email = row[3]
-       log = row[4]
+        results = cursor.fetchall()
+        prefMethod = ""
+        phoneNumber = ""
+        carrier = ""
+        email = ""
+        log = ""
+        for row in results:
+            prefMethod = row[0]
+            phoneNumber = row[1]
+            phoneNumber = phoneNumber + row[2]
+            email = row[3]
+            log = row[4]
 
-	if (prefMethod == "Text"):
-	   sendAlert(phoneNumber)
-	elif (prefMethod == "Email"):
-	   sendAlert(email)
-    elif (prefMethod == "Both"):
-       sendAlert(phoneNumber)
-       sendAlert(email)
-    log = log + "<tr><td>"+ strftime("%m/%d/%Y", gmtime()) + "</td><td>" + strftime("%H:%M", gmtime()) + "</td></tr>"
-	sql = "UPDATE users SET log = '" + log + "' log WHERE deviceID = '" + data + "'"
-    cursor.execute(sql)
-    db.close()
-        if not data:
-            break
-        reply = "OK . . " + data
-        conn.sendall(reply)
+        if (prefMethod == "Text"):
+           sendAlert(phoneNumber)
+        elif (prefMethod == "Email"):
+           sendAlert(email)
+        elif (prefMethod == "Both"):
+           sendAlert(phoneNumber)
+           sendAlert(email)
+        log = log + "<tr><td>"+ strftime("%m/%d/%Y", gmtime()) + "</td><td>" + strftime("%H:%M", gmtime()) + "</td></tr>"
+
+        sql = "UPDATE users SET log = \'" + log + "\' WHERE deviceID = \'" + str(givenDevice) + "\'"
+        cursor.execute(sql)
+        db.commit()
+        db.close()
+
     conn.close()
     print "end connections"
 
