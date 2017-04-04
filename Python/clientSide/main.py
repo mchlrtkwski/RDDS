@@ -31,6 +31,7 @@ while 1:
     #networkData = subprocess.check_output(["/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport", "-s"])
     networkDataNames = subprocess.check_output(["nmcli", "-t", "-f", "SSID", "dev", "wifi"])
     networkDataStrength = subprocess.check_output(["nmcli", "-t", "-f", "SIGNAL", "dev", "wifi"])
+    networkDataMACA = subprocess.check_output(["nmcli", "-t", "-f", "BSSID", "dev", "wifi"])
     #networkData = networkData.split()
     #networkData = networkData[8:
     networkDataNames = networkDataNames.split()
