@@ -34,7 +34,7 @@
 		
 		//check if password and passwordCheck match 
         if($_POST['passwordCheck'] != $_POST['password']) {
-            echo "<script type='text/javascript'>alert('Password does not match re-type password');</script>";
+            echo "<script type='text/javascript'>alert('password does not match re-type password');</script>";
 			$checkLogin = false;
 		}
 		
@@ -86,10 +86,11 @@
 			  }
 			  $row = $stmt->fetch();
 			  if($row){
+				  echo "<script type='text/javascript'>alert('Device already in use');</script>";
 				  header("Location: signup.php");
 				  die("Redirecting to signup.php");
 			  }
-			  //////////////////Salt and hash the given Password//////////////////////
+			  //////////////////Salt and hash the given password//////////////////////
 			  $salt = dechex(mt_rand(0, 2147483647)) . dechex(mt_rand(0, 2147483647));
 			  $password = hash('sha256', $_POST['password'] . $salt);
 			  for($round = 0; $round < 65536; $round++){
@@ -97,7 +98,7 @@
 			  }
 			  //////////////////Insert new User into Database////////////////////////
 			  
-			  $query = "INSERT INTO users (deviceID, password, salt, email) VALUES (:deviceID,:password, :salt, :email)";
+			  $query = "INSERT INTO users (deviceID, password, salt, email) VALUES (:deviceID, :password, :salt, :email)";
 			  $query_params = array(':deviceID' => $_POST['deviceNumber'], ':password' => $password, ':salt' => $salt, ':email' => $_POST['email']);
 			  try{
 				  $stmt = $db->prepare($query);
@@ -140,8 +141,8 @@
         <h2 class="form-signin-heading">Sign up</h2>
         <input name = "deviceNumber" id="inputEmail" class="form-control" placeholder="Device Number" required autofocus>
         <input name = "email" type="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
-       <input name = "password" type="password" id="inputEmail" class="form-control" placeholder="Password" required>
-       <input name = "passwordCheck" type='password' id="inputEmail" class="form-control" placeholder="Confirm Password" required>
+       <input name = "password" type="password" id="inputEmail" class="form-control" placeholder="password" required>
+       <input name = "passwordCheck" type='password' id="inputEmail" class="form-control" placeholder="Confirm password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
         <p style="text-align:center;">or</p>
         <button onclick = "window.location='./index.php'; return false;" class="btn btn-lg btn-primary btn-block">Sign in</button>
