@@ -28,18 +28,15 @@ while 1:
     alertUser = False
 
     #Obtain all terminal output for parsing
-    #networkData = subprocess.check_output(["/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport", "-s"])
     networkDataNames = subprocess.check_output(["nmcli", "-t", "-f", "SSID", "dev", "wifi"])
     networkDataStrength = subprocess.check_output(["nmcli", "-t", "-f", "SIGNAL", "dev", "wifi"])
-    #networkData = networkData.split()
-    #networkData = networkData[8:
     networkDataNames = networkDataNames.split()
     networkDataStrength = networkDataStrength.split()
     numberOfNetworks = len(networkDataNames)
     SSID_List = []
     RSSI_List = []
 
-    #create NetworkNode objects to
+    #create NetworkNode objects
     for x in range(0, numberOfNetworks):
         node = NetworkNode(networkDataNames[x], networkDataStrength[x])
         SSID_List.append(node)
